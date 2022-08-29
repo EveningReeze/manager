@@ -1,8 +1,8 @@
 <!--
  * @Author: @wangzisheng @Z17690726020@163.com
  * @Date: 2022-08-28 14:21:44
- * @LastEditors: @wangzisheng @Z17690728020@163.com
- * @LastEditTime: 2022-08-28 18:41:47
+ * @LastEditors: WolfKing Z17690728020@163.com
+ * @LastEditTime: 2022-08-29 16:15:49
  * @FilePath: \manager\src\views\HomeView.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -31,38 +31,18 @@
       <el-container>
         <el-aside width="200px">
           <!-- @open="handleOpen" @close="handleClose" -->
-          <el-menu active-text-color="#ffd04b" background-color="#545c64" class="el-menu-vertical-demo" default-active="2" text-color="#fff" router >
-            <!-- <el-sub-menu index="1">
+          <el-menu active-text-color="#ffd04b" background-color="#545c64" class="el-menu-vertical-demo"
+            default-active="2" text-color="#fff" router>
+            <!-- <el-sub-menu  :index="item.path" v-for="item in MenuList" :key="item.path">
               <template #title>
                 <el-icon>
                   <location />
                 </el-icon>
-                <span>Navigator One</span>
+                <span>{{item.meta.title}}</span>
               </template>
-              <el-menu-item-group title="Group One">
-                <el-menu-item index="1-1">item one</el-menu-item>
-                <el-menu-item index="1-2">item two</el-menu-item>
+              <el-menu-item-group  v-for="i in item.children" :key="i.path" :title="i.meta.title">
               </el-menu-item-group>
-              <el-menu-item-group title="Group Two">
-                <el-menu-item index="1-3">item three</el-menu-item>
-              </el-menu-item-group>
-              <el-sub-menu index="1-4">
-                <template #title>item four</template>
-                <el-menu-item index="1-4-1">item one</el-menu-item>
-              </el-sub-menu>
             </el-sub-menu> -->
-            <!-- <el-menu-item index="2">
-              <el-icon>
-                <icon-menu />
-              </el-icon>
-              <span>Navigator Two</span>
-            </el-menu-item> -->
-            <!-- <el-menu-item index="3" disabled>
-              <el-icon>
-                <document />
-              </el-icon>
-              <span>Navigator Three</span>
-            </el-menu-item> -->
             <el-menu-item :index="item.path" v-for="item in MenuList" :key="item.path">
               <el-icon>
                 <setting />
@@ -73,7 +53,7 @@
         </el-aside>
         <el-container>
           <el-main>
-            <router-view/>
+            <router-view />
           </el-main>
           <!-- <el-footer>Footer</el-footer> -->
         </el-container>
@@ -83,7 +63,6 @@
 </template>
 
 <script lang="ts">
-import { log } from 'console'
 import { defineComponent } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -92,8 +71,8 @@ export default defineComponent({
   components: {},
   setup () {
     const router = useRouter()
-    const MenuList = router.getRoutes().filter(i => i.meta.isShow)
-    console.log(MenuList)
+    const MenuList = router.getRoutes().filter((i) => i.meta.isShow)
+    console.log(MenuList, 'item.meta.title----')
     return {
       MenuList
     }
@@ -103,7 +82,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .common-layout {
     .el-header {
-        background-color: #666;
+        background-color: #545C64;
         .grid-left {
             height: 60px;
             line-height: 60px;
@@ -122,11 +101,10 @@ export default defineComponent({
             text-align: center;
         }
     }
-    .el-aside{
-
-      .el-menu{
-        height: calc(100vh - 60px);
-      }
+    .el-aside {
+        .el-menu {
+            height: calc(100vh - 60px);
+        }
     }
 }
 </style>

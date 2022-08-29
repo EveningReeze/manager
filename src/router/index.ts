@@ -1,8 +1,8 @@
 /*
  * @Author: @wangzisheng @Z17690728020@163.com
  * @Date: 2022-08-28 14:21:44
- * @LastEditors: @wangzisheng @Z17690728020@163.com
- * @LastEditTime: 2022-08-28 18:22:32
+ * @LastEditors: WolfKing Z17690728020@163.com
+ * @LastEditTime: 2022-08-29 14:54:23
  * @FilePath: \manager\src\router\index.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -37,7 +37,7 @@ const routes: Array<RouteRecordRaw> = [
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "UserList" */ '../views/MenuList/UserList.vue')
+        component: () => import(/* webpackChunkName: "UserList" */ '../views/UserList/index.vue')
       },
       {
         path: '/UserManager',
@@ -49,7 +49,21 @@ const routes: Array<RouteRecordRaw> = [
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "UserList" */ '../views/MenuList/UserManager.vue')
+        component: () => import(/* webpackChunkName: "UserManager" */ '../views/UserManager/index.vue'),
+        children: [
+          {
+            path: '/UserRights',
+            name: 'UserRights',
+            meta: {
+              isShow: true,
+              title: '用户权限'
+            },
+            // route level code-splitting
+            // this generates a separate chunk (about.[hash].js) for this route
+            // which is lazy-loaded when the route is visited.
+            component: () => import(/* webpackChunkName: "UserRights" */ '../views/UserManager/UserRights.vue')
+          }
+        ]
       }
     ]
   },

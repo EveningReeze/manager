@@ -1,15 +1,15 @@
 /*
  * @Author: @wangzisheng @Z17690728020@163.com
  * @Date: 2022-08-28 15:43:22
- * @LastEditors: @wangzisheng @Z17690728020@163.com
- * @LastEditTime: 2022-08-28 17:06:54
+ * @LastEditors: WolfKing Z17690728020@163.com
+ * @LastEditTime: 2022-08-29 15:42:35
  * @FilePath: \manager\src\request\axios.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 import axios from 'axios'
 // 创建 axios实例
 const service = axios.create({
-  baseURL: '', // 所有请求的公共地址部分
+  baseURL: 'http://192.168.31.166:8083/drugcheck_web', // 所有请求的公共地址部分
   timeout: 3000, // 请求超时时间 这里的意思是当请求时间超过5秒还未取得结果时 提示用户请求超时
   headers: {
     'Content-Type': 'application/json;charset=UTF-8'
