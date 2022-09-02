@@ -2,15 +2,18 @@
  * @Author: WolfKing Z17690728020@163.com
  * @Date: 2022-09-01 14:18:51
  * @LastEditors: WolfKing Z17690728020@163.com
- * @LastEditTime: 2022-09-01 17:00:41
+ * @LastEditTime: 2022-09-02 14:07:50
  * @FilePath: \manager\src\layout\SubMneu\MenuList.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
   <div>
-    <el-menu router default-active="2" class="el-menu-vertical-demo" :collapse="collapse" @open="handleOpen"
+    <el-menu router :collapse-transition="false" default-active="2" class="el-menu-vertical-demo" :collapse="collapse" @open="handleOpen"
       @close="handleClose">
-      <menu-item :menuList="MenuList"></menu-item>
+      <h3 v-show="collapse">后台</h3>
+      <h3 v-show="!collapse">后台管理系统</h3>
+      <menu-item :noChildren="noChildren" :hasChildren="hasChildren"></menu-item>
+      <!-- <menu-item :menuList="MenuList"></menu-item> -->
     </el-menu>
   </div>
 </template>
@@ -30,56 +33,65 @@ export default defineComponent({
     const MenuList:unknown & any = [
       {
         path: '/',
-        name: '首页',
+        name: 'home',
+        label: '首页',
         redirect: '',
         meta: {
-          icon: ''
-        },
-        children: []
+          icon: 'TrendCharts'
+        }
       },
       {
         path: '/userInfo',
-        name: '用户管理',
+        name: 'userInfo',
+        label: '用户管理',
         meta: {
-          icon: ''
+          icon: 'TrendCharts'
         },
         children: [
           {
             path: '/userList',
-            name: '用户列表',
+            name: 'userList',
+            label: '用户列表',
             meta: {
               icon: ''
-            },
-            children: [
-            ]
+            }
           },
           {
             path: '/information',
-            name: '用户信息',
+            name: 'information',
+            label: '用户信息',
             meta: {
               icon: ''
-            },
-            children: []
+
+            }
           },
           {
             path: '/userEdit',
-            name: '用户信息编辑',
+            name: 'userEdit',
+            label: '用户信息编辑',
             meta: {
               icon: ''
-            },
-            children: []
+
+            }
           },
           {
             path: '/userAdd',
-            name: '用户新增',
+            name: 'userAdd',
+            label: '用户新增',
             meta: {
               icon: ''
-            },
-            children: []
+
+            }
           }
         ]
       }
     ]
+    const noChildren = () => {
+      return MenuList.filter((item:any) => !item.children)
+    }
+    const hasChildren = () => {
+      return MenuList.filter((item:any) => item.children)
+    }
     const handleOpen = (key: string, keyPath: string[]) => {
       console.log(key, keyPath, 'handleOpen')
     }
@@ -89,7 +101,9 @@ export default defineComponent({
     return {
       handleOpen,
       handleClose,
-      MenuList
+      // MenuList,
+      hasChildren,
+      noChildren
     }
   }
 })

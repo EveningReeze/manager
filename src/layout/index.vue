@@ -2,14 +2,14 @@
  * @Author: WolfKing Z17690728020@163.com
  * @Date: 2022-09-01 14:14:13
  * @LastEditors: WolfKing Z17690728020@163.com
- * @LastEditTime: 2022-09-01 17:11:31
+ * @LastEditTime: 2022-09-02 10:40:23
  * @FilePath: \manager\src\layout\index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
   <div class="common-layout">
     <el-container>
-      <el-aside :style="`--el-aside-width: ${!collapse ? '235px' : '60px'}`">
+      <el-aside :style="`--el-aside-width: ${!collapse ? '235px' : '50px'}`">
         <MenuList :collapse="collapse"></MenuList>
       </el-aside>
       <el-container>
@@ -53,9 +53,8 @@
 
         </el-header>
         <el-main>
-          <router-view v-slot="{ Component }">
-            <component :is="Component" />
-          </router-view>
+          <router-view/>
+            <!-- <component :is="Component" /> -->
         </el-main>
       </el-container>
     </el-container>
