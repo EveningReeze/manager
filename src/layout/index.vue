@@ -2,7 +2,7 @@
  * @Author: WolfKing Z17690728020@163.com
  * @Date: 2022-09-01 14:14:13
  * @LastEditors: WolfKing Z17690728020@163.com
- * @LastEditTime: 2022-09-02 16:15:34
+ * @LastEditTime: 2022-09-02 17:35:38
  * @FilePath: \manager\src\layout\index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -10,7 +10,7 @@
   <div class="common-layout">
     <el-container>
       <el-aside :style="`--el-aside-width: ${!collapse ? '235px' : '50px'}`">
-        <MenuList :collapse="collapse"></MenuList>
+        <MenuList :collapse="$store.state.collapse"></MenuList>
       </el-aside>
       <el-container>
         <el-header>
@@ -18,7 +18,7 @@
             <el-col :span="1">
               <span class="menu-collapse" @click="changeCollapse">
                 <el-icon>
-                  <Fold v-if="collapse" />
+                  <Fold v-if="$store.state.collapse" />
                   <Expand v-else />
                 </el-icon>
               </span>
@@ -60,24 +60,17 @@ import MenuList from './components/SubMneu/MenuList.vue'
 import { useRoute } from 'vue-router'
 export default defineComponent({
   setup () {
-    const collapse = ref(false)
+    // const collapse = ref(false)
     const router = useRoute()
     console.log(router.matched, 'mached')
-
-    const handleOpen = (key: string, keyPath: string[]) => {
-      console.log(key, keyPath)
-    }
-    const handleClose = (key: string, keyPath: string[]) => {
-      console.log(key, keyPath)
-    }
     const changeCollapse = () => {
-      collapse.value = !collapse.value
+      // $store.state.collapse.value = !collapse.value
     }
     const handleCommand = (command: string | number | object) => {
       console.log(command)
     }
     return {
-      collapse,
+      // collapse,
       changeCollapse,
       handleCommand
     }
