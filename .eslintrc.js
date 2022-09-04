@@ -1,8 +1,8 @@
 /*
  * @Author: @wangzisheng @Z17690728020@163.com
  * @Date: 2022-08-28 14:21:44
- * @LastEditors: WolfKing Z17690728020@163.com
- * @LastEditTime: 2022-09-02 17:25:29
+ * @LastEditors: EveningReeze Z17690728020@163.com
+ * @LastEditTime: 2022-09-04 16:36:51
  * @FilePath: \manager\.eslintrc.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -27,6 +27,11 @@ module.exports = {
     ' @typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
-    'symbol-description': 'off'
+    'symbol-description': 'off',
+    'no-constant-condition': 2,
+    'no-unused-expressions': [0, {
+      allowShortCircuit: true,
+      allowTernary: true
+    }]
   }
 }

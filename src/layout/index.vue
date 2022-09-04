@@ -1,15 +1,15 @@
 <!--
  * @Author: WolfKing Z17690728020@163.com
  * @Date: 2022-09-01 14:14:13
- * @LastEditors: WolfKing Z17690728020@163.com
- * @LastEditTime: 2022-09-02 17:35:38
+ * @LastEditors: EveningReeze Z17690728020@163.com
+ * @LastEditTime: 2022-09-04 16:41:31
  * @FilePath: \manager\src\layout\index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
   <div class="common-layout">
     <el-container>
-      <el-aside :style="`--el-aside-width: ${!collapse ? '235px' : '50px'}`">
+      <el-aside :style="`--el-aside-width: ${!$store.state.collapse ? '235px' : '50px'}`">
         <MenuList :collapse="$store.state.collapse"></MenuList>
       </el-aside>
       <el-container>
@@ -23,16 +23,17 @@
                 </el-icon>
               </span>
             </el-col>
-
             <el-col :span="21">
-              <el-breadcrumb separator="/">
-                <el-breadcrumb-item :to="{ path: '/' }">homepage</el-breadcrumb-item>
+              <el-breadcrumb separator="/" class="bread">
+                <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+                <!-- <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item> -->
+                <el-breadcrumb-item :to="current.path" v-if="current">{{current.label}}</el-breadcrumb-item>
               </el-breadcrumb>
             </el-col>
             <el-col :span="2">
               <el-dropdown @command="handleCommand">
                 <div class="el-dropdown-link lineH-left user-info">
-                  <img class="user-img" src="../assets/login-img/userimg.jpg" alt="">
+                  <img class="user-img" src="@/assets/login-img/userimg.jpg" alt="">
                   admin
                 </div>
                 <template #dropdown>
@@ -43,8 +44,10 @@
                 </template>
               </el-dropdown>
             </el-col>
+            <el-col :span="24">
+              <tabs></tabs>
+            </el-col>
           </el-row>
-
         </el-header>
         <el-main>
           <router-view />
@@ -55,27 +58,37 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref } from 'vue'
+import { defineComponent, reactive, ref, computed } from 'vue'
 import MenuList from './components/SubMneu/MenuList.vue'
 import { useRoute } from 'vue-router'
+import { useStore } from '../store'
+import Headers from './components/Header/Headers.vue'
+import Tabs from './components/Header/Tabs.vue'
 export default defineComponent({
   setup () {
     // const collapse = ref(false)
     const router = useRoute()
     console.log(router.matched, 'mached')
+    const store = useStore()
     const changeCollapse = () => {
-      // $store.state.collapse.value = !collapse.value
+      store.state.collapse = !store.state.collapse
     }
     const handleCommand = (command: string | number | object) => {
       console.log(command)
     }
+    const current = computed(() => {
+      return store.state.currentMenu
+    })
+    console.log(current, 'current--')
+
     return {
       // collapse,
       changeCollapse,
-      handleCommand
+      handleCommand,
+      current
     }
   },
-  components: { MenuList }
+  components: { MenuList, Tabs }
 })
 </script>
 
@@ -85,7 +98,7 @@ export default defineComponent({
         overflow: hidden;
     }
     .el-header {
-        --el-header-height: 45px;
+        --el-header-height: 100px;
         --el-header-padding: 0;
         line-height: 45px;
         .menu-collapse {
@@ -128,6 +141,9 @@ export default defineComponent({
                 margin-right: 3px;
             }
         }
+    }
+    .bread ::v-deep span {
+        cursor: pointer !important;
     }
 }
 </style>

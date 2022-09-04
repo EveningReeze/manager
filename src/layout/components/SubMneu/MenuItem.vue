@@ -1,8 +1,8 @@
 <!--
  * @Author: WolfKing Z17690728020@163.com
  * @Date: 2022-09-01 15:07:47
- * @LastEditors: WolfKing Z17690728020@163.com
- * @LastEditTime: 2022-09-02 10:41:47
+ * @LastEditors: EveningReeze Z17690728020@163.com
+ * @LastEditTime: 2022-09-04 15:52:52
  * @FilePath: \manager\src\layout\components\SubMneu\MenuItem.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -50,6 +50,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
+import { useStore } from '@/store'
 // import { IUserRouterItem } from './MenuList'
 import { useRouter } from 'vue-router'
 export default defineComponent({
@@ -67,10 +68,13 @@ export default defineComponent({
   },
   setup () {
     const router = useRouter()
+    const store = useStore()
     const clickMenu = (item:any) => {
       router.push({
         name: item.name
       })
+      console.log(item, 'item----')
+      store.commit('selectMneu', item)
     }
 
     return {

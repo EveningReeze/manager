@@ -1,8 +1,8 @@
 /*
  * @Author: @wangzisheng @Z17690728020@163.com
  * @Date: 2022-08-28 15:43:22
- * @LastEditors: WolfKing Z17690728020@163.com
- * @LastEditTime: 2022-08-29 15:42:35
+ * @LastEditors: EveningReeze Z17690728020@163.com
+ * @LastEditTime: 2022-09-04 13:58:47
  * @FilePath: \manager\src\request\axios.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -31,7 +31,8 @@ service.interceptors.request.use((config) => {
 // }
 )
 service.interceptors.response.use(res => {
-  const code:number = res.data.code
+  const { code, data } = res.data
+  // const code:number = res.data.code
   if (code !== 200) {
     return Promise.reject(res.data)
   }

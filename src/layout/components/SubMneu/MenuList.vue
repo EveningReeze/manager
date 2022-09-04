@@ -1,17 +1,17 @@
 <!--
  * @Author: WolfKing Z17690728020@163.com
  * @Date: 2022-09-01 14:18:51
- * @LastEditors: WolfKing Z17690728020@163.com
- * @LastEditTime: 2022-09-02 14:07:50
+ * @LastEditors: EveningReeze Z17690728020@163.com
+ * @LastEditTime: 2022-09-04 13:24:16
  * @FilePath: \manager\src\layout\SubMneu\MenuList.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
   <div>
-    <el-menu router :collapse-transition="false" default-active="2" class="el-menu-vertical-demo" :collapse="collapse" @open="handleOpen"
+    <el-menu router :collapse-transition="false" default-active="2" class="el-menu-vertical-demo" :collapse="$store.state.collapse" @open="handleOpen"
       @close="handleClose">
-      <h3 v-show="collapse">后台</h3>
-      <h3 v-show="!collapse">后台管理系统</h3>
+      <h3 v-show="$store.state.collapse">后台</h3>
+      <h3 v-show="!$store.state.collapse">后台管理系统</h3>
       <menu-item :noChildren="noChildren" :hasChildren="hasChildren"></menu-item>
       <!-- <menu-item :menuList="MenuList"></menu-item> -->
     </el-menu>
@@ -24,11 +24,6 @@ import MenuItem from './MenuItem.vue'
 
 export default defineComponent({
   components: { MenuItem },
-  props: {
-    collapse: {
-      type: Boolean
-    }
-  },
   setup () {
     const MenuList:unknown & any = [
       {
