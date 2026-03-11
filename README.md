@@ -1,4 +1,4 @@
-# manager
+# manager/后台管理模板（vue2）
 
 ## Project setup
 ```
